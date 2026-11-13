@@ -1,0 +1,22 @@
+.page {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.code {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.title {
+  margin: 0.5rem 0 1.25rem;
+  font-size: 1.35rem;
+  color: var(--text);
+}
+
+.link {
+  font-weight: 600;
+  color: var(--primary);
+}

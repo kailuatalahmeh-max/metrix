@@ -1,0 +1,25 @@
+# Local PostgreSQL for development only.
+# Start:  docker compose up -d
+# Stop:   docker compose down
+services:
+  db:
+    image: postgres:18-alpine
+    container_name: metrix-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: metrix
+      POSTGRES_PASSWORD: metrix
+      POSTGRES_DB: metrix
+    ports:
+      - '5432:5432'
+    volumes:
+      # Keeps your data when the container stops.
+      - metrix-db-data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U metrix -d metrix']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  metrix-db-data:
