@@ -26,7 +26,7 @@ export class PrismaErrorFilter implements ExceptionFilter {
         catchingError:
           exception instanceof Prisma.PrismaClientKnownRequestError &&
           exception.code === 'P2025',
-        message: 'Workshop not found',
+        message: 'Record not found',
         statusCode: 404,
       },
       {

@@ -13,6 +13,17 @@ export default function WorkshopsPage() {
     getAllWorkshops();
   }, [getAllWorkshops]);
 
+  const handleDeleteWorkshop = async (workshopId: number) => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this workshop? This action cannot be undone.",
+      )
+    ) {
+      const deleteWorkshop = useWorkshopStore.getState().deleteWorkshop;
+      await deleteWorkshop(workshopId);
+    }
+  };
+
   return (
     <section className={styles.page}>
       <div className={styles.header}>
@@ -54,7 +65,10 @@ export default function WorkshopsPage() {
                     <button
                       type="button"
                       className={styles.deleteButton}
-                      aria-label={t.workshops.deleteLabel(workshop.customerName)}
+                      aria-label={t.workshops.deleteLabel(
+                        workshop.customerName,
+                      )}
+                      onClick={() => handleDeleteWorkshop(workshop.id)}
                     >
                       {t.workshops.delete}
                     </button>
