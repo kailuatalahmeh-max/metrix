@@ -5,7 +5,7 @@ import { WorkshopService } from './workshop.service.js';
 @Controller('workshop')
 export class WorkshopController {
   constructor(private workshopService: WorkshopService) {}
-  @Post('create-workshop')
+  @Post()
   create(
     @Body()
     body: CreateWorkshopDto,
@@ -13,12 +13,12 @@ export class WorkshopController {
     return this.workshopService.create(body);
   }
 
-  @Get('get-all-workshops')
+  @Get()
   findAll() {
     return this.workshopService.findAll();
   }
 
-  @Delete('delete-workshop/:workshopId')
+  @Delete('/:workshopId')
   delete(@Param('workshopId', ParseIntPipe) workshopId: number) {
     return this.workshopService.deleteWorkshop(workshopId);
   }

@@ -24,13 +24,15 @@ export const useWorkshopStore = create<WorkshopStore>((set) => ({
       return;
     }
     try {
-      const response = await axios.post(`${urlAPI}/workshop/create-workshop`, {
+      const response = await axios.post(`${urlAPI}/workshop`, {
         customerName: form.customerName,
         productName: form.productName,
         region: form.region,
         meters: metersNumber,
       });
-      toast.success(response.data.message || getTranslation().messages.workshopCreated);
+      toast.success(
+        response.data.message || getTranslation().messages.workshopCreated,
+      );
     } catch (error) {
       handleError(error);
       return;
@@ -39,13 +41,13 @@ export const useWorkshopStore = create<WorkshopStore>((set) => ({
 
   deleteWorkshop: async (workshopId: number) => {
     try {
-      const response = await axios.delete(
-        `${urlAPI}/workshop/delete-workshop/${workshopId}`
+      const response = await axios.delete(`${urlAPI}/workshop/${workshopId}`);
+      toast.success(
+        response.data.message || getTranslation().messages.workshopDeleted,
       );
-      toast.success(response.data.message || getTranslation().messages.workshopDeleted);
       set((state) => ({
         workshops: state.workshops.filter(
-          (workshop) => workshop.id !== workshopId
+          (workshop) => workshop.id !== workshopId,
         ),
       }));
     } catch (error) {
@@ -54,7 +56,7 @@ export const useWorkshopStore = create<WorkshopStore>((set) => ({
   },
   getAllWorkshops: async () => {
     try {
-      const response = await axios.get(`${urlAPI}/workshop/get-all-workshops`);
+      const response = await axios.get(`${urlAPI}/workshop`);
       set({ workshops: response.data });
       console.log("Fetched workshops:", response.data);
     } catch (error) {
